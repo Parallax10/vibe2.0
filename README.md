@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+=================VIBE=================
+-¿Que es?
+    Es un prototipo de aplicacion donde se podran ver y descubrir artistas orientados a la musica, podras añadir tus favoritos a tu perfil y descubrir otros nuevos,esta orientado principalmente al formato Web para que este disponible tanto en ordenadores como en dispositivos moviles.
 
-## Getting Started
+-¿Como desplegarlo?
+    Para desplegarlo tienes que tener descargado Node.js y npm, una vez instalados necesitas ejecutar un cmd, ya sea el integrado en windows o la terminal de visual studio code, en ambos el procedimiento es el mismo, debes de dirigirte hacia la ruta donde este descargado el proyecto en este caso te debes de ubicar dentro de la carpeta "projectodi" y ejecutar el comando "npm install" para instalar las dependencias de npm y luego ejecutar "npm run dev" para que se empieze a renderizar el projecto, en la terminal te aparecera para dirijirte hacia tu "localhost/3000" que es donde se empezara a renderizar la pagina.
 
-First, run the development server:
+-¿Como se usa?
+    Esta version no cuenta con apenas funcionalidades, es solo el esqueleto de los componentes de la aplicacion y las paginas que tendra,
+    La primera pagina que renderiza corresponderia a la Landing, para acceder a las diferentes paginas a continuacion proporciono lo que debes de poner en la parte superior de tu navegador donde aparecen las url de las paginas web, estas seran las que podran acceder los usuarios sin rango administrador:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+       
+    -localhost:3000/Login
+    -localhost:3000/Registro
+    -localhost:3000/Inicio
+    -localhost:3000/FiltroGenero
+    -localhost:3000/FiltroPais
+    -localhost:3000/Perfil
+    -localhost:3000/ConfiguracionPerfil
+    -localhost:3000/PerfilArtista
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+    --ACLARACION--
+    Las paginas de filtro no son funcionales, deberian de modificar el grid de los artistas para poder filtrar segun pais/genero, pero aun no soy capaz de hacerlo, sera implementado en el futuro.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+    Estos serian las paginas a las que unicamente tendran acceso los usuarios de rango administrador, aparte de estas en las paginas de usuarios hay un boton que sirve para alternar a como lo veria un administrador y como lo veria un usuario normal un ejemplo es en la pagina inicio al ser usuario apareceria un boton llamado "sugerir artista" pero siendo administrador seria "añadir artista":
+    
+    -localhost:3000/ModificarArtista
+    -localhost:3000/NuevoArtista
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+-¿Que tecnologias usa?
+    Principalmente usa React y componentes HTML por el momento, en esta version aun no cuenta con diseños en CSS ni formato responsive para verse de forma comoda en dispositivos moviles, tambien para el control de versiones se usa GitHub en una rama develop.
 
-## Learn More
+-Funcionalidades previstas:
+    Sistema de filtros funcional por género musical.
+    Sistema de filtros funcional por país.
+    Sistema de favoritos.
+    Roles usuario y administrador.
+    Añadir y editar artistas.
+    Sugerencias de artistas por parte de los usuarios.
+    Diseño responsive para dispositivos móviles.
+    Estilos con CSS.
+    Inicio de sesion y registro de usuarios.
+    Persistencia de datos con base de datos.
 
-To learn more about Next.js, take a look at the following resources:
+-Autor:
+    https://github.com/Parallax10
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+-Repositorio en GitHub:
+    https://github.com/Parallax10/Vibe
