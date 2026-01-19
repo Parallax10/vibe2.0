@@ -1,7 +1,7 @@
 "use client"
 import NavBar from "../navBar";
 import GridArtistas from "../GridArtistas";
-import GridCanciones from "../perfilArtista/GridCanciones";
+import GridCanciones from "../PerfilArtista/GridCanciones";
 import { useState } from "react";
 export  default function Home() {
 return(

@@ -30,6 +30,9 @@ img: "/imagenes/ADO.png"
 export default function GridArtistas({modo}) {
     const generos = [...new Set(artistas.map(a => a.genero))].sort();
     const pais = [...new Set(artistas.map(a => a.pais))].sort();
+    
+    
+    
     if(modo=="genero"){
         return (
                 <div>
@@ -74,7 +77,7 @@ export default function GridArtistas({modo}) {
             );
     }else
 return (
-<div>
+<div className="grid grid-cols-4 gap-10">
     {artistas.map((artista, index) => (
     <CardArtistas
         key={index}

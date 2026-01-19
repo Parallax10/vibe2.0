@@ -5,7 +5,7 @@ import { useState } from "react";
 export default function NavBar(){
     const[busqueda, setBusqueda]=useState("");
     return(
-            <div>
+            <div className="bg-fondoNavbar">
                 <div>
                     <img src="/imagenes/Logo.png" width={100} height={90} alt="Logo Vibe" />
                     <p>VIBE</p>
