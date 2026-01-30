@@ -32,7 +32,7 @@ return(
         <NavBar></NavBar>
         <div>
             <h1>Filtro por paises</h1>
-            <GridArtistas modo="pais"></GridArtistas>
+            <GridArtistas modo="pais" size="large"></GridArtistas>
         </div>
     </div>
 );

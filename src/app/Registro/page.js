@@ -1,36 +1,45 @@
-export default function Home() {
-    const [nombre, setNombre] = useState("");
-    const [email, setEmail] = useState("");
-    const [Contraseña, setContraseña] = useState("");
+"use client"
+import { useState } from "react";
 
-    function validarDatos(){
-        if(nombre=="" || email=="" || Contraseña==""){
-            alert("Por favor complete todos los campos");
-        } else {    
-            alert("Registro exitoso");
-            setNombre("");
-            setEmail("");
-            setContraseña("");
+export default function Home() {
+    const [usuario, setUsuario] = useState("");
+    const [contraseña, setContraseña] = useState("");
+    const [error, setError] = useState("");
+    const [correo,setCorreo]=useState("");
+    const handleClick = () => {
+        if (usuario=="" || contraseña==""||correo=="") {
+            setError("Los campos no pueden estar vacíos");
+            return;
         }
-    }
-    return(
+        setError("");
+    };
+    return (
         <div>
-    <div>
-        <img src="/imagenes/Logo.png" width={100} height={90} alt="Logo Vibe" />
-    </div>
-    <h1>VIBE</h1>
-    <div>
-        <p>Nombre de usuario</p>
-        <input type="text" value={nombre} onChange={(e=>(setNombre(e.target.value)))}></input>
-        <br/>
-        <p>Email</p>
-        <input type="email" value={email} onChange={(e=>(setEmail(e.target.value)))}></input>
-        <br/>
-        <p>Contraseña</p>
-        <input type="password" value={Contraseña} onChange={(e=>(setContraseña(e.target.value)))}></input>
-        <br/>
-        <button onClick={()=>validarDatos()}>Iniciar sesion</button>
-    </div>
-    </div>
+            
+            <div>
+                <img src="/imagenes/Logo.png" width={100}  alt="Logo Vibe" />
+            </div>
+            <br></br>
+            
+            <div className="flex flex-col items-center text-center">
+                <h1 className="text-6xl">VIBE</h1>
+                <br></br>
+                <h1 className="text-3xl">Registro</h1>
+                    <div className="bg-white text-black py-15 px-4 m-20 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 rounded-2xl">
+                        <p>usuario</p>
+                        <input className="border-1 rounded-2xl w-full px-2" type="text" value={usuario} onChange={(e) => setUsuario(e.target.value)}></input>
+                        <br/><br/>
+                        <p>contraseña</p>
+                        <input className="border-1 rounded-2xl w-full px-2" type="contraseña" value={contraseña} onChange={(e) => setContraseña(e.target.value)}></input>
+                        <br/><br/>
+                        <p>correo</p>
+                        <input className="border-1 rounded-2xl w-full px-2" type="contraseña" value={correo} onChange={(e) => setCorreo(e.target.value)}></input>
+                        <br/><br/>
+                        <p className="text-red-600">{error}</p>
+                        <br></br>
+                        <button  className="border-1 rounded-2xl w-full"onClick={handleClick}>Sign In</button>
+                    </div>
+            </div>
+        </div>
     );
 }

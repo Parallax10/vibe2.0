@@ -36,7 +36,7 @@ export default function Home() {
     <br></br>
     <br></br>
     <br></br>
-      <GridArtistas></GridArtistas>
+      <GridArtistas size="small"></GridArtistas>
     </div>
   );
 }

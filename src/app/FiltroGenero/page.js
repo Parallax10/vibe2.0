@@ -25,12 +25,14 @@ export  default function Home() {
     }
 return(
     <div>
+        <NavBar></NavBar>
         <button onClick={()=>cambiarPerfil()}>Admin/User</button>
         <button onClick={()=>accion()}>{texto}</button>
-        <NavBar></NavBar>
         <div>
-            <h1>Filtro Genero</h1>
-            <GridArtistas modo="genero"></GridArtistas>
+            <h1 className="text-5xl">Filtro Genero</h1>
+            <hr></hr>
+            <br></br>
+            <GridArtistas modo="genero" size="large"></GridArtistas>
         </div>
     </div>
 );

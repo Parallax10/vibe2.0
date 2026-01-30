@@ -27,16 +27,25 @@ export  default function Home() {
     }
 return(
     <div>
+        <NavBar></NavBar>
         <button onClick={()=>cambiarPerfil()}>Admin/User</button>
         <button onClick={()=>accion()}>{texto}</button>
-        <NavBar></NavBar>
+        
         <div>
-            <h1>Top Artistas</h1>
-            <GridArtistas></GridArtistas>
+            <h1 className=" text-5xl">Top Artistas</h1>
+            <hr></hr>
+            <br></br>
+            <div className="flex flex-col items-center text-center">
+                <GridArtistas size="large"></GridArtistas>    
+            </div>
         </div>
         <div>
-            <h1>Artistas recientes</h1>
-            <GridArtistas></GridArtistas>
+            <h1 className=" text-5xl">Artistas recientes</h1>
+            <hr></hr>
+            <br></br>
+            <div className="flex flex-col items-center text-center">
+                <GridArtistas size="large"></GridArtistas>    
+            </div>
         </div>
     </div>
 );

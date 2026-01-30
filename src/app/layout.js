@@ -22,6 +22,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {children}
+        <img src="/imagenes/fondo.png" className="fixed top-0 left-0 w-full h-full object-cover -z-10"></img>
       </body>
     </html>
   );
