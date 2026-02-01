@@ -4,7 +4,7 @@ import CardArtistas from "./CardArtistas";
 const artistas = [
 { nombre: "AC/DC", pais: "Australia", genero: "Rock", img: "/imagenes/ACDC.png" },
 { nombre: "Band-Maid", pais: "Japón", genero: "J-Rock", img: "/imagenes/MAIDBAND.png" },
-{ nombre: "Linkin Park", pais: "EE. UU.", genero: "Nu-Metal", img: "/imagenes/Linkin.png" },
+{ nombre: "Linkin Park", pais: "EE.UU", genero: "Nu-Metal", img: "/imagenes/Linkin.png" },
 { nombre: "Ado", pais: "Japón", genero: "J-Rock", img: "/imagenes/ADO.png" }
 ];
 
@@ -19,10 +19,8 @@ return (
     {generos.map((genero, index) => (
         <div key={index}>
         <h2 className="text-2xl mb-4">{genero}</h2>
-        <div className="flex flex-wrap gap-6">
-            {artistas
-            .filter(a => a.genero === genero)
-            .map((artista, i) => (
+        <div className="flex flex-col gap-6 justify-center m-5">
+            {artistas.filter(a => a.genero === genero).map((artista, i) => (
                 <CardArtistas key={i} {...artista} size={size} />
             ))}
         </div>
@@ -38,7 +36,7 @@ return (
     {paises.map((pais, index) => (
         <div key={index}>
         <h2 className="text-2xl mb-4">{pais}</h2>
-        <div className="flex flex-wrap gap-6">
+        <div className="flex flex-col gap-6 justify-center m-5">
             {artistas
             .filter(a => a.pais === pais)
             .map((artista, i) => (
@@ -52,7 +50,7 @@ return (
 }
 
 return (
-<div className="grid grid-cols-4 gap-10">
+<div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
     {artistas.map((artista, index) => (
     <CardArtistas key={index} {...artista} size={size} />
     ))}

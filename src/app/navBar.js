@@ -1,27 +1,39 @@
-"use client"
-
 import { useState } from "react";
 
 export default function NavBar(){
-    const[busqueda, setBusqueda]=useState("");
+    const [busqueda, setBusqueda] = useState("");
     return(
-            <div className="bg-fondoNavbar flex flex-row ">
-                
-                <div className="grid grid-cols-2">
-                    <img src="/imagenes/Logo.png" width={80} alt="Logo Vibe" />
-                    <p className="py-5">VIBE</p>
-                </div>
-                <div className="py-5 mx-3">
-                    <button className="mx-5 px-5 bg-botones rounded-2xl" onClick={()=>alert("Esto llevaria a la pagina de filtro por pais")}>Pais</button>
-                    <button className="mx-5 px-5 bg-botones rounded-2xl" onClick={()=>alert("Esto llevaria a la pagina de filtro por genero")}>Genero</button>
-                </div>
-                <div className="mx-auto grid grid-cols-3">
-                    <input className="bg-white my-5 rounded-2xl text-black px-2" type="text" value={busqueda} onChange={(e)=>setBusqueda(e.target.value)}></input>
-                    <button className="mx-5" onClick={()=>alert("Esto llevaria a la pagina de resultados de busqueda")}><img src="imagenes/lupa.svg" width={25}></img></button>
-                </div >
-                <div className="mx-20 py-5">
-                    <button onClick={()=>alert("Esto llevaria al perfil del usuario")}><img src="imagenes/user.svg" width={25}></img></button>
-                </div>
+        <div className="bg-fondoNavbar flex flex-col sm:flex-row items-center sm:justify-between px-4 sm:px-6">
+            <div className="flex items-center w-full sm:w-auto mb-2 sm:mb-0">
+                <a href="/Inicio" className="flex items-center">
+                    <img src="/imagenes/Logo.png" width={60} alt="Logo Vibe" className="sm:w-20 w-16"/>
+                    <p className="py-2 sm:py-5 text-xl sm:text-2xl ml-2">VIBE</p>
+                </a>
             </div>
+
+            <div className="flex flex-wrap justify-center sm:justify-start gap-2 sm:gap-4 py-2 sm:py-5">
+                <a href="/FiltroPais">
+                    <button className="px-3 sm:px-5 bg-botones rounded-2xl hover:bg-red-900 transition">Pais</button>
+                </a>
+                <a href="/FiltroGenero">
+                    <button className="px-3 sm:px-5 bg-botones rounded-2xl hover:bg-red-900 transition">Genero</button>
+                </a>
+            </div>
+
+            <div className="flex items-center w-full sm:w-auto my-2 sm:my-0">
+                <input className="bg-white rounded-2xl text-black px-2 py-1 w-full sm:w-auto" type="text" value={busqueda} onChange={(e)=>setBusqueda(e.target.value)}/>
+                <button className="ml-2 sm:ml-5">
+                    <img src="imagenes/lupa.svg" width={25} alt="Buscar"/>
+                </button>
+            </div>
+
+            <div className="py-2 sm:py-5">
+                <a href="/Perfil">
+                    <button>
+                        <img src="imagenes/user.svg" width={25} alt="Perfil"/>
+                    </button>
+                </a>
+            </div>
+        </div>
     );
 }

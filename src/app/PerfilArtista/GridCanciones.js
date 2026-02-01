@@ -1,29 +1,20 @@
 "use client";
 
-import CardCancion from "./CardCanciones";
+import CardCanciones from "./CardCanciones";
 
 const canciones = [
-{
-titulo: "unravel",
-genero: "J-Rock",
-img: "/imagenes/unravel.png"
-},
-{
-titulo: "Rockstar",
-genero: "J-Rock",
-img: "/imagenes/adobum.png"
-}
+{ titulo: "unravel", genero: "J-Rock", img: "/imagenes/unravel.png" },
+{ titulo: "Rockstar", genero: "J-Rock", img: "/imagenes/adobum.png" },
 ];
 
-export default function GridCanciones() {
+export default function GridCanciones({ size = "small" }) {
 return (
-<div>
+<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 px-4">
     {canciones.map((cancion, index) => (
-    <CardCancion
+    <CardCanciones
         key={index}
-        titulo={cancion.titulo}
-        genero={cancion.genero}
-        img={cancion.img}
+        {...cancion}
+        size={size}
     />
     ))}
 </div>
