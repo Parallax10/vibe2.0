@@ -1,6 +1,7 @@
 "use client";
+import Link from "next/link"; // Añadido el import de Link
 
-export default function CardArtistas({ nombre, pais, genero, img, size = "small" }) {
+export default function CardArtistas({ id, nombre, pais, genero, img, size = "small" }) { // Añadido 'id' aquí
 
 const cardSize =
 size === "large"
@@ -14,12 +15,15 @@ size === "large"
     : 80;
 
 return (
-<div className={`flex flex-col justify-between items-center bg-fondoNavbar rounded shadow-md text-center ${cardSize}`}>
+// Envolvemos tu div en el Link apuntando a la ruta dinámica
+<Link  href={`/PerfilArtista/${id}`}> 
+    <div className={`flex flex-col justify-between items-center bg-fondoNavbar rounded shadow-md text-center ${cardSize}`}>
 
-    <img src={img}alt={nombre}width={imgSize}height={imgSize}className="mb-3"/>
-    <p className="font-semibold text-2xl">{nombre}</p>
-    <p className="text-1xl">País:{pais}</p>
-    <p className="text-1xl">Género:{genero}</p>
-</div>
+        <img src={img}alt={nombre}width={imgSize}height={imgSize}className="mb-3"/>
+        <p className="font-semibold text-2xl">{nombre}</p>
+        <p className="text-1xl">País:{pais}</p>
+        <p className="text-1xl">Género:{genero}</p>
+    </div>
+</Link>
 );
 }
