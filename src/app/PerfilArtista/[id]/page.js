@@ -94,7 +94,7 @@ export default function PerfilArtista({ params }) {
                     <div>
                         <h2 className="text-xl sm:text-2xl font-bold border-b border-gray-600 pb-2 mb-4">CANCIONES</h2>
                         {/* LE PASAMOS EL ID DINÁMICO AL GRID DE CANCIONES */}
-                        <GridCanciones size="large" artistaId={idArtista} />
+                        <GridCanciones size="large" artistaId={idArtista} artistaNombre={artista.nombre} />
                     </div>
                 </main>
             </div>

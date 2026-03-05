@@ -1,53 +1,26 @@
 "use client";
-import { useState, useEffect } from "react";
-import CardCanciones from "./CardCanciones";
 
-export default function GridCanciones({ size = "small", artistaId }) {
-  const [canciones, setCanciones] = useState([]);
-  const [cargando, setCargando] = useState(true);
-
-  useEffect(() => {
-    const cargarCanciones = async () => {
-      try {
-        // Llamamos a nuestra API pasándole el ID del artista
-        const url = artistaId ? `/api/canciones?artista_id=${artistaId}` : '/api/canciones';
-        const respuesta = await fetch(url);
-        
-        if (respuesta.ok) {
-          const datos = await respuesta.json();
-          setCanciones(datos);
-        } else {
-          // AQUÍ ESTÁ EL CAMBIO: Atrapamos el error real que devuelve el servidor
-          const errorReal = await respuesta.json();
-          console.error("Fallo al cargar la API de canciones. Detalles del servidor:", errorReal);
-        }
-      } catch (error) {
-        console.error("Error de conexión:", error);
-      } finally {
-        setCargando(false);
-      }
-    };
-
-    cargarCanciones();
-  }, [artistaId]);
-
-  if (cargando) {
-    return <p className="text-center w-full text-gray-400">Cargando canciones...</p>;
-  }
-
-  if (canciones.length === 0) {
-    return <p className="text-center w-full text-gray-400">No hay canciones registradas para este artista.</p>;
-  }
+export default function CardCanciones({ titulo, artistaNombre, portada, size = "small" }) {
+  const cardSize = size === "large" ? "w-64 h-80 p-6 text-base" : "w-40 p-4 text-sm";
+  const imgSize = size === "large" ? 120 : 80;
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 px-4">
-      {canciones.map((cancion, index) => (
-        <CardCanciones
-          key={index}
-          {...cancion}
-          size={size}
-        />
-      ))}
+    <div className={`flex flex-col justify-start items-center bg-zinc-800 rounded shadow-md text-center ${cardSize}`}>
+      <img 
+        src={portada || "/imagenes/Logo.png"} 
+        alt={titulo} 
+        width={imgSize} 
+        height={imgSize} 
+        className="mb-3 rounded-md object-cover"
+      />
+      
+      <div className="w-full flex flex-col items-center mt-2">
+        <p className="text-gray-400 text-xs uppercase font-bold">Nombre:</p>
+        <p className="font-semibold text-lg text-white mb-2">{titulo}</p>
+        
+        <p className="text-gray-400 text-xs uppercase font-bold">Artista:</p>
+        <p className="font-semibold text-md text-white">{artistaNombre}</p>
+      </div>
     </div>
   );
 }
