@@ -1,12 +1,16 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useAuth } from "../context/AuthContext"; // Importamos el contexto
 
-export default function Home() {
+export default function Login() {
     const [usuario, setUsuario] = useState("");
     const [contraseña, setContraseña] = useState("");
     const [error, setError] = useState("");
     const router = useRouter();
+
+    // Sacamos setIsAdmin del contexto
+    const { setIsAdmin } = useAuth();
 
     const hacerLogin = async () => {
         if (usuario === "" || contraseña === "") {
@@ -18,14 +22,25 @@ export default function Home() {
             const respuesta = await fetch('/api/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username: usuario, password: contraseña }) 
+                body: JSON.stringify({ username: usuario, password: contraseña })
             });
 
             const resultado = await respuesta.json();
 
             if (respuesta.ok) {
+                // 1. Guardamos en el navegador
                 localStorage.setItem('usuarioVibe', JSON.stringify(resultado.usuario));
-                router.push('/Inicio'); 
+
+                // 2. Avisamos al contexto AL INSTANTE si es admin o no
+                // (Comprueba si tu base de datos devuelve 1/0 o true/false)
+                if (resultado.usuario.admin === true || resultado.usuario.admin === 1) {
+                    setIsAdmin(true);
+                } else {
+                    setIsAdmin(false);
+                }
+
+                // 3. Redirigimos
+                router.push('/Inicio');
             } else {
                 setError(resultado.error);
             }
@@ -36,7 +51,7 @@ export default function Home() {
 
     return (
         <div className="min-h-screen relative px-4">
-            <img src="/imagenes/Logo.png" width={80} alt="Logo Vibe" className="absolute top-4 left-4 sm:w-[100px]"/>
+            <img src="/imagenes/Logo.png" width={80} alt="Logo Vibe" className="absolute top-4 left-4 sm:w-[100px]" />
             <div className="min-h-screen flex flex-col items-center justify-center">
                 <h1 className="text-4xl sm:text-6xl font-bold mb-2">VIBE</h1>
                 <h2 className="text-2xl mb-8">Login</h2>
@@ -44,11 +59,11 @@ export default function Home() {
                     <div className="flex flex-col gap-4">
                         <div>
                             <label className="block font-semibold mb-1">Usuario</label>
-                            <input type="text" value={usuario} onChange={(e) => setUsuario(e.target.value)} className="w-full p-2 rounded border"/>
+                            <input type="text" value={usuario} onChange={(e) => setUsuario(e.target.value)} className="w-full p-2 rounded border" />
                         </div>
                         <div>
                             <label className="block font-semibold mb-1">Contraseña</label>
-                            <input type="password" value={contraseña} onChange={(e) => setContraseña(e.target.value)} className="w-full p-2 rounded border"/>
+                            <input type="password" value={contraseña} onChange={(e) => setContraseña(e.target.value)} className="w-full p-2 rounded border" />
                         </div>
                         <p className="text-red-600 text-sm text-center font-medium">{error}</p>
                         <button onClick={hacerLogin} className="mt-4 bg-botones text-white py-2 rounded hover:bg-red-800 transition">
