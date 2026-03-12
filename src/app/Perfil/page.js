@@ -3,19 +3,26 @@ import NavBar from "../navBar";
 import CardArtistas from "../CardArtistas";
 import CardCanciones from "../PerfilArtista/CardCanciones";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Perfil() {
-    // Empezamos con las listas vacías
     const [perfil, setPerfil] = useState({ usuario: null, artistas: [], canciones: [] });
     const [cargando, setCargando] = useState(true);
-
-    // USUARIO DE PRUEBA (El mismo "1" que usamos en los favoritos)
-    const idUsuarioActual = 1; 
+    const router = useRouter();
 
     useEffect(() => {
         const cargarPerfil = async () => {
+            const usuarioGuardado = localStorage.getItem('usuarioVibe');
+            
+            if (!usuarioGuardado) {
+                router.push('/Login');
+                return;
+            }
+
+            const usuarioObj = JSON.parse(usuarioGuardado);
+
             try {
-                const respuesta = await fetch(`/api/perfil?id=${idUsuarioActual}`);
+                const respuesta = await fetch(`/api/perfil?id=${usuarioObj.id}`);
                 if (respuesta.ok) {
                     const datos = await respuesta.json();
                     setPerfil(datos);
@@ -29,9 +36,8 @@ export default function Perfil() {
             }
         };
         cargarPerfil();
-    }, []);
+    }, [router]);
 
-    // Pantallas de carga y error
     if (cargando) return <div className="min-h-screen bg-black text-white flex justify-center items-center font-bold">Cargando tu vibra musical...</div>;
     if (!perfil.usuario) return <div className="min-h-screen bg-black text-white flex justify-center items-center">Usuario no encontrado</div>;
 
@@ -41,10 +47,9 @@ export default function Perfil() {
         <div className="min-h-screen bg-black text-white pb-10">
             <NavBar />
             
-            {/* CABECERA DEL PERFIL (Banner y Foto) */}
             <div className="relative w-full h-48 sm:h-64 bg-zinc-800">
                 <img 
-                    src={usuario.FtoBanner || "/imagenes/banner.png"} 
+                    src={usuario.FtoBanner || "/imagenes/banner.jpg"} 
                     alt="Banner de usuario" 
                     className="w-full h-full object-cover opacity-60"
                 />
@@ -56,16 +61,12 @@ export default function Perfil() {
                         className="w-24 h-24 sm:w-32 sm:h-32 rounded-full border-4 border-black object-cover bg-zinc-900 shadow-xl"
                     />
                     <div className="mb-2 sm:mb-4 drop-shadow-lg">
-                        {/* AQUÍ ESTÁ EL CAMBIO: Ahora lee usuario.Nombre con mayúscula */}
                         <h1 className="text-3xl sm:text-5xl font-bold">{usuario.Nombre || "Usuario Vibe"}</h1>
                     </div>
                 </div>
             </div>
 
-            {/* CONTENIDO (Grids de Favoritos) */}
             <div className="mt-20 sm:mt-24 px-4 sm:px-10">
-                
-                {/* SECCIÓN 1: ARTISTAS */}
                 <div className="mb-12">
                     <h2 className="text-xl sm:text-2xl font-bold border-b border-gray-600 pb-2 mb-6">ARTISTAS FAVORITOS</h2>
                     {artistas.length === 0 ? (
@@ -79,7 +80,6 @@ export default function Perfil() {
                     )}
                 </div>
 
-                {/* SECCIÓN 2: CANCIONES */}
                 <div>
                     <h2 className="text-xl sm:text-2xl font-bold border-b border-gray-600 pb-2 mb-6">CANCIONES FAVORITAS</h2>
                     {canciones.length === 0 ? (
@@ -92,7 +92,6 @@ export default function Perfil() {
                         </div>
                     )}
                 </div>
-                
             </div>
         </div>
     );
