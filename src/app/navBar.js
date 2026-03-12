@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "./context/AuthContext";
 
-export default function NavBar({ pageType }) {
+export default function NavBar({ pageType, idArtista }) {
     const [busqueda, setBusqueda] = useState("");
     const router = useRouter();
     const { isAdmin } = useAuth();
@@ -32,18 +32,36 @@ export default function NavBar({ pageType }) {
 
                 {isAdmin && pageType === 'artistProfile' && (
                     <>
-                        <button className="px-3 sm:px-5 bg-green-600 text-white rounded-2xl hover:bg-green-800 transition">Modificar artista</button>
-                        <button className="px-3 sm:px-5 bg-green-600 text-white rounded-2xl hover:bg-green-800 transition">Añadir canciones</button>
+                        {/* Redirige a ModificarArtista pasando el ID por URL */}
+                        <button
+                            onClick={() => router.push(`/ModificarArtista?id=${idArtista}`)}
+                            className="px-3 sm:px-5 bg-green-600 text-white rounded-2xl hover:bg-green-800 transition"
+                        >
+                            Modificar artista
+                        </button>
+
+                        {/* Redirige a una futura página de Añadir Canciones */}
+                        <button
+                            onClick={() => router.push(`/NuevaCancion?idArtista=${idArtista}`)}
+                            className="px-3 sm:px-5 bg-green-600 text-white rounded-2xl hover:bg-green-800 transition"
+                        >
+                            Añadir canciones
+                        </button>
                     </>
                 )}
 
                 {isAdmin && (pageType === 'home' || pageType === 'filters') && (
-                    <button className="px-3 sm:px-5 bg-green-600 text-white rounded-2xl hover:bg-green-800 transition">Añadir artista</button>
+                    <button
+                        onClick={() => router.push('/NuevoArtista')}
+                        className="px-3 sm:px-5 bg-green-600 text-white rounded-2xl hover:bg-green-800 transition"
+                    >
+                        Añadir artista
+                    </button>
                 )}
             </div>
 
             <div className="flex items-center w-full sm:w-auto my-2 sm:my-0">
-                <input className="bg-white rounded-2xl text-black px-2 py-1 w-full sm:w-auto" type="text" value={busqueda} onChange={(e) => setBusqueda(e.target.value)} />
+                <input className="bg-white rounded-2xl  px-2 py-1 w-full sm:w-auto" type="text" value={busqueda} onChange={(e) => setBusqueda(e.target.value)} />
                 <button className="ml-2 sm:ml-5">
                     <img src="/imagenes/lupa.svg" width={25} alt="Buscar" />
                 </button>

@@ -53,7 +53,7 @@ export default function PerfilArtista({ params }) {
 
     return (
         <div className="min-h-screen bg-black text-white">
-            <NavBar pageType="artistProfile" />
+            <NavBar pageType="artistProfile" idArtista={idArtista} />
 
             <div className="flex flex-col sm:flex-row mt-4">
                 <aside className="w-full sm:w-72 bg-zinc-900 p-4 border-b sm:border-b-0 sm:border-r border-gray-700">

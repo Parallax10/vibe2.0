@@ -1,10 +1,12 @@
 "use client";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation"; // <-- Añadimos esto
 import { useAuth } from "../context/AuthContext";
 
 export default function CardCanciones({ id, titulo, artistaNombre, portada, size = "small" }) {
   const [esFavorito, setEsFavorito] = useState(false);
   const { isAdmin } = useAuth();
+  const router = useRouter(); // <-- Inicializamos router
   const idUsuarioActual = 1;
 
   const cardSize = size === "large" ? "w-64 h-80 p-6 text-base" : "w-40 p-4 text-sm";
@@ -38,6 +40,7 @@ export default function CardCanciones({ id, titulo, artistaNombre, portada, size
 
       {isAdmin && (
         <button
+          onClick={() => router.push(`/ModificarCancion?id=${id}`)} // <-- Redirige enviando el id de la canción
           className="absolute top-3 left-3 text-xl hover:scale-110 transition-transform z-10 drop-shadow-lg"
           title="Editar canción"
         >

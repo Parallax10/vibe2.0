@@ -55,7 +55,7 @@ export default function Login() {
             <div className="min-h-screen flex flex-col items-center justify-center">
                 <h1 className="text-4xl sm:text-6xl font-bold mb-2">VIBE</h1>
                 <h2 className="text-2xl mb-8">Login</h2>
-                <div className="bg-white text-black rounded-2xl shadow-md p-8 w-full max-w-xs sm:w-80">
+                <div className="bg-white  rounded-2xl shadow-md p-8 w-full max-w-xs sm:w-80">
                     <div className="flex flex-col gap-4">
                         <div>
                             <label className="block font-semibold mb-1">Usuario</label>

@@ -51,7 +51,7 @@ export default function Home() {
             <div className="min-h-screen flex flex-col items-center justify-center px-4">
                 <h1 className="text-6xl font-bold mb-2">VIBE</h1>
                 <h2 className="text-2xl mb-8">Registro</h2>
-                <div className="bg-white text-black rounded-2xl shadow-md p-8 w-full max-w-md">
+                <div className="bg-white rounded-2xl shadow-md p-8 w-full max-w-md">
                     <div className="flex flex-col gap-4">
                         <div>
                             <label className="block font-semibold mb-1">Usuario</label>
