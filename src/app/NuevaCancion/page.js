@@ -6,14 +6,13 @@ import { useSearchParams, useRouter } from "next/navigation";
 function FormularioCancion() {
     const [portada, setPortada] = useState("");
     const [nombre, setNombre] = useState("");
-    const [genero, setGenero] = useState("");
 
     const searchParams = useSearchParams();
     const router = useRouter();
     const idArtista = searchParams.get('idArtista');
 
     const validarCancion = async () => {
-        if (portada === "" || nombre === "" || genero === "") {
+        if (portada === "" || nombre === "") {
             alert("Por favor complete todos los campos de la canción");
             return;
         }
@@ -21,7 +20,7 @@ function FormularioCancion() {
         const res = await fetch('/api/canciones', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ titulo: nombre, genero: genero, portada: portada, id_artista: idArtista })
+            body: JSON.stringify({ titulo: nombre, portada: portada, id_artista: idArtista })
         });
 
         if (res.ok) {
@@ -38,10 +37,6 @@ function FormularioCancion() {
                     <div>
                         <label className="block font-semibold mb-1">Nombre de la canción</label>
                         <input type="text" value={nombre} onChange={(e) => setNombre(e.target.value)} className="w-full p-2 rounded border" />
-                    </div>
-                    <div>
-                        <label className="block font-semibold mb-1">Género</label>
-                        <input type="text" value={genero} onChange={(e) => setGenero(e.target.value)} className="w-full p-2 rounded border" />
                     </div>
                     <div>
                         <label className="block font-semibold mb-1">URL de la Portada</label>

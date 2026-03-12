@@ -6,7 +6,6 @@ import { useSearchParams, useRouter } from "next/navigation";
 function FormularioModificarCancion() {
     const [portada, setPortada] = useState("");
     const [nombre, setNombre] = useState("");
-    const [genero, setGenero] = useState("");
     const [idArtista, setIdArtista] = useState(null);
 
     const searchParams = useSearchParams();
@@ -19,7 +18,6 @@ function FormularioModificarCancion() {
                 .then(res => res.json())
                 .then(data => {
                     setNombre(data.titulo || "");
-                    setGenero(data.genero || "");
                     setPortada(data.portada || "");
                     setIdArtista(data.id_artista);
                 });
@@ -27,7 +25,7 @@ function FormularioModificarCancion() {
     }, [idCancion]);
 
     const validarCampos = async () => {
-        if (portada === "" || nombre === "" || genero === "") {
+        if (portada === "" || nombre === "" ) {
             alert("Hay campos en blanco, por favor rellénalos.");
             return;
         }
@@ -35,7 +33,7 @@ function FormularioModificarCancion() {
         const res = await fetch(`/api/canciones/${idCancion}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ titulo: nombre, genero: genero, portada: portada })
+            body: JSON.stringify({ titulo: nombre, portada: portada })
         });
 
         if (res.ok) {
@@ -52,10 +50,6 @@ function FormularioModificarCancion() {
                     <div>
                         <label className="block font-semibold mb-1">Nombre de la canción</label>
                         <input type="text" value={nombre} onChange={(e) => setNombre(e.target.value)} className="w-full p-2 rounded border " />
-                    </div>
-                    <div>
-                        <label className="block font-semibold mb-1">Género</label>
-                        <input type="text" value={genero} onChange={(e) => setGenero(e.target.value)} className="w-full p-2 rounded border " />
                     </div>
                     <div>
                         <label className="block font-semibold mb-1">URL de la Portada</label>
