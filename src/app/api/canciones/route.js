@@ -1,12 +1,9 @@
 import { NextResponse } from 'next/server';
-// CORRECCIÓN: Apuntamos a tu carpeta utils donde realmente está supabase.js
 import { supabase } from '@/app/utils/supabase';
 
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
   const artistaId = searchParams.get('artista_id');
-
-  // La tabla sí lleva mayúscula, esto está bien
   let query = supabase.from('Canciones').select('*');
 
   if (artistaId) {

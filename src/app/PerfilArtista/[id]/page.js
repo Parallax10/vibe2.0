@@ -28,7 +28,6 @@ export default function PerfilArtista({ params }) {
                     setEsFavorito(dataFav.isFavorito);
                 }
             } catch (error) {
-                console.error("Error:", error);
             } finally {
                 setCargando(false);
             }

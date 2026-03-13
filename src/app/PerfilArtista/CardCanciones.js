@@ -1,15 +1,18 @@
 "use client";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation"; // <-- Añadimos esto
+import { useRouter } from "next/navigation";
 import { useAuth } from "../context/AuthContext";
 
 export default function CardCanciones({ id, titulo, artistaNombre, portada, size = "small" }) {
   const [esFavorito, setEsFavorito] = useState(false);
   const { isAdmin } = useAuth();
-  const router = useRouter(); // <-- Inicializamos router
+  const router = useRouter();
   const idUsuarioActual = 1;
 
-  const cardSize = size === "large" ? "w-64 h-80 p-6 text-base" : "w-40 p-4 text-sm";
+  const cardSize = size === "large"
+    ? "w-64 h-80 p-6 text-base"
+    : "w-40 h-64 p-4 text-sm";
+
   const imgSize = size === "large" ? 120 : 80;
 
   useEffect(() => {
@@ -40,7 +43,7 @@ export default function CardCanciones({ id, titulo, artistaNombre, portada, size
 
       {isAdmin && (
         <button
-          onClick={() => router.push(`/ModificarCancion?id=${id}`)} // <-- Redirige enviando el id de la canción
+          onClick={() => router.push(`/ModificarCancion?id=${id}`)}
           className="absolute top-3 left-3 text-xl hover:scale-110 transition-transform z-10 drop-shadow-lg"
           title="Editar canción"
         >
@@ -61,15 +64,15 @@ export default function CardCanciones({ id, titulo, artistaNombre, portada, size
         alt={titulo}
         width={imgSize}
         height={imgSize}
-        className="mb-3 rounded-md object-cover"
+        className="mb-3 rounded-md object-cover aspect-square"
       />
 
-      <div className="w-full flex flex-col items-center mt-2">
+      <div className="w-full flex flex-col items-center mt-2 overflow-hidden">
         <p className="text-gray-400 text-xs uppercase font-bold">Nombre:</p>
-        <p className="font-semibold text-lg text-white mb-2">{titulo}</p>
+        <p className="font-semibold text-lg text-white mb-2 truncate w-full" title={titulo}>{titulo}</p>
 
         <p className="text-gray-400 text-xs uppercase font-bold">Artista:</p>
-        <p className="font-semibold text-md text-white">{artistaNombre}</p>
+        <p className="font-semibold text-md text-white truncate w-full" title={artistaNombre}>{artistaNombre}</p>
       </div>
     </div>
   );

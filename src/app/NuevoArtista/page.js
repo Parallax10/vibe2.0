@@ -6,13 +6,12 @@ import { useRouter } from "next/navigation";
 export default function NuevoArtista() {
     const [nombre, setNombre] = useState("");
     const [genero, setGenero] = useState("");
-    const [pais, setPais] = useState(""); // <-- Añadido el estado para país
+    const [pais, setPais] = useState("");
     const [imagen, setImagen] = useState("");
     const [imagenBanner, setImagenBanner] = useState("");
     const router = useRouter();
 
     const ValidarDatosArtista = async () => {
-        // Añadimos pais a la validación
         if (nombre === "" || genero === "" || pais === "" || imagen === "" || imagenBanner === "") {
             alert("Por favor complete todos los campos del artista");
             return;
@@ -21,7 +20,6 @@ export default function NuevoArtista() {
         const res = await fetch('/api/artistas', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            // Añadimos pais al objeto que enviamos a la API
             body: JSON.stringify({
                 nombre: nombre,
                 genero: genero,

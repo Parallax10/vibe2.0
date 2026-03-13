@@ -3,41 +3,37 @@ import { useState, useEffect } from "react";
 import CardArtistas from "./CardArtistas";
 
 export default function GridArtistas({ modo, size = "small" }) {
-    // 1. Creamos el estado para guardar los artistas de la base de datos
     const [artistas, setArtistas] = useState([]);
-    const [cargando, setCargando] = useState(true); // Para mostrar un mensaje mientras cargan
+    const [cargando, setCargando] = useState(true); 
 
-    // 2. Usamos useEffect para ir a buscar los datos nada más cargar la página
+    
     useEffect(() => {
         const cargarArtistas = async () => {
         try {
             const respuesta = await fetch('/api/artistas');
             if (respuesta.ok) {
             const datos = await respuesta.json();
-            setArtistas(datos); // Guardamos los datos de Supabase en nuestro estado
+            setArtistas(datos); 
             } else {
             console.error("Fallo al cargar la API");
             }
         } catch (error) {
             console.error("Error de conexión:", error);
         } finally {
-            setCargando(false); // Ya terminamos de cargar (con éxito o error)
+            setCargando(false); 
         }
         };
 
         cargarArtistas();
     }, []);
 
-    // 3. Mientras esperamos a Supabase, mostramos esto:
     if (cargando) {
         return <p className="text-center mt-10">Cargando artistas...</p>;
     }
 
-    // 4. Lógica original que ya tenías para agrupar
     const generos = [...new Set(artistas.map(a => a.genero))].sort();
     const paises = [...new Set(artistas.map(a => a.pais))].sort();
 
-    // 5. Renderizados dependiendo del "modo"
     if (modo === "genero") {
         return (
         <div>
@@ -74,7 +70,6 @@ export default function GridArtistas({ modo, size = "small" }) {
         );
     }
 
-    // Vista por defecto (Grid)
     return (
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
         {artistas.map((artista, index) => (

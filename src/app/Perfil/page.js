@@ -47,51 +47,67 @@ export default function Perfil() {
         <div className="min-h-screen bg-black text-white pb-10">
             <NavBar />
             
-            <div className="relative w-full h-48 sm:h-64 bg-zinc-800">
-                <img 
-                    src={usuario.FtoBanner || "/imagenes/banner.jpg"} 
-                    alt="Banner de usuario" 
-                    className="w-full h-full object-cover opacity-60"
-                />
-                
-                <div className="absolute -bottom-12 sm:-bottom-16 left-4 sm:left-10 flex items-end gap-4">
+            <div className="flex flex-col sm:flex-row mt-4">
+                <aside className="w-full sm:w-72 bg-zinc-900 p-4 border-b sm:border-b-0 sm:border-r border-gray-700">
                     <img 
                         src={usuario.FtoPerfil || "/imagenes/pfp.png"} 
                         alt="Foto de perfil" 
-                        className="w-24 h-24 sm:w-32 sm:h-32 rounded-full border-4 border-black object-cover bg-zinc-900 shadow-xl"
+                        className="w-1/2 sm:w-full mx-auto rounded-md mb-6 object-cover aspect-square" 
                     />
-                    <div className="mb-2 sm:mb-4 drop-shadow-lg">
-                        <h1 className="text-3xl sm:text-5xl font-bold">{usuario.Nombre || "Usuario Vibe"}</h1>
+                    <div className="space-y-3 text-sm">
+                        <p className="font-bold">NOMBRE :</p>
+                        <p className="text-gray-300 uppercase">{usuario.Nombre || "Usuario Vibe"}</p>
+                        
+                        <p className="font-bold">CORREO :</p>
+                        <p className="text-gray-300 break-words">{usuario.Correo}</p>
+                        
+                        <p className="font-bold">PRIVACIDAD :</p>
+                        <p className="text-gray-300 uppercase">{usuario.Privacidad || "Público"}</p>
+
+                        <button 
+                            onClick={() => router.push('/ConfiguracionPerfil')}
+                            className="mt-4 w-full py-2 rounded-md transition font-bold bg-green-600 hover:bg-green-700 text-white"
+                        >
+                            Editar perfil
+                        </button>
                     </div>
-                </div>
-            </div>
+                </aside>
 
-            <div className="mt-20 sm:mt-24 px-4 sm:px-10">
-                <div className="mb-12">
-                    <h2 className="text-xl sm:text-2xl font-bold border-b border-gray-600 pb-2 mb-6">ARTISTAS FAVORITOS</h2>
-                    {artistas.length === 0 ? (
-                        <p className="text-gray-400 italic">Aún no tienes artistas favoritos.</p>
-                    ) : (
-                        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
-                            {artistas.map((artista, index) => (
-                                <CardArtistas key={index} {...artista} size="small" />
-                            ))}
-                        </div>
-                    )}
-                </div>
+                <main className="flex-1 px-4 sm:px-6 py-4">
+                    <div className="mb-6">
+                        <img 
+                            src={usuario.FtoBanner || "/imagenes/banner.jpg"} 
+                            alt="Banner" 
+                            className="w-full h-[200px] sm:h-[250px] object-cover rounded-lg" 
+                        />
+                    </div>
+                    
+                    <div className="mb-12">
+                        <h2 className="text-xl sm:text-2xl font-bold border-b border-gray-600 pb-2 mb-4">ARTISTAS FAVORITOS</h2>
+                        {artistas.length === 0 ? (
+                            <p className="text-gray-400 italic mt-2">Aún no tienes artistas favoritos.</p>
+                        ) : (
+                            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 mt-4">
+                                {artistas.map((artista, index) => (
+                                    <CardArtistas key={index} {...artista} size="small" />
+                                ))}
+                            </div>
+                        )}
+                    </div>
 
-                <div>
-                    <h2 className="text-xl sm:text-2xl font-bold border-b border-gray-600 pb-2 mb-6">CANCIONES FAVORITAS</h2>
-                    {canciones.length === 0 ? (
-                        <p className="text-gray-400 italic">Aún no tienes canciones favoritas.</p>
-                    ) : (
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                            {canciones.map((cancion, index) => (
-                                <CardCanciones key={index} {...cancion} size="small" />
-                            ))}
-                        </div>
-                    )}
-                </div>
+                    <div>
+                        <h2 className="text-xl sm:text-2xl font-bold border-b border-gray-600 pb-2 mb-4">CANCIONES FAVORITAS</h2>
+                        {canciones.length === 0 ? (
+                            <p className="text-gray-400 italic mt-2">Aún no tienes canciones favoritas.</p>
+                        ) : (
+                            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 mt-4">
+                                {canciones.map((cancion, index) => (
+                                    <CardCanciones key={index} {...cancion} size="small" />
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                </main>
             </div>
         </div>
     );

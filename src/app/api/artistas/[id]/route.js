@@ -2,7 +2,6 @@ import { NextResponse } from 'next/server';
 import { supabase } from '@/app/utils/supabase';
 
 export async function GET(request, { params }) {
-  // NEXT.JS 15: Tenemos que esperar a que los params se resuelvan en el backend también
   const resolvedParams = await params;
   const idDelArtista = resolvedParams.id;
 

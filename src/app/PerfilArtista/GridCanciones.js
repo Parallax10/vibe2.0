@@ -35,7 +35,7 @@ export default function GridCanciones({ size = "small", artistaId, artistaNombre
         <CardCanciones
           key={index}
           {...cancion}
-          artistaNombre={artistaNombre} // Pasamos el nombre del artista a la tarjeta
+          artistaNombre={artistaNombre}
           size={size}
         />
       ))}
