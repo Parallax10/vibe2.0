@@ -14,6 +14,10 @@ export async function GET() {
 export async function POST(request) {
   const body = await request.json();
 
+  if (!body || !body.Nombre) {
+    return NextResponse.json({ error: "Faltan datos obligatorios para crear el artista" }, { status: 400 });
+  }
+
   const { data, error } = await supabase
     .from('Artistas')
     .insert([body])

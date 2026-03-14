@@ -2,8 +2,9 @@
 import { useState, useEffect, Suspense } from "react";
 import NavBar from "../navBar";
 import { useSearchParams, useRouter } from "next/navigation";
+import { useAuth } from "../context/AuthContext";
 
-function FormularioModificarCancion() {
+function ModificarCancion() {
     const [portada, setPortada] = useState("");
     const [nombre, setNombre] = useState("");
     const [idArtista, setIdArtista] = useState(null);
@@ -11,6 +12,7 @@ function FormularioModificarCancion() {
     const searchParams = useSearchParams();
     const router = useRouter();
     const idCancion = searchParams.get('id');
+    const { isAdmin } = useAuth();
 
     useEffect(() => {
         if (idCancion) {
@@ -42,6 +44,22 @@ function FormularioModificarCancion() {
         }
     };
 
+    const borrarCancion = async () => {
+        const confirmar = window.confirm("¿Estás seguro de que quieres borrar esta canción?");
+        if (!confirmar) return;
+
+        const res = await fetch(`/api/canciones/${idCancion}`, {
+            method: 'DELETE'
+        });
+
+        if (res.ok) {
+            alert("Canción borrada correctamente");
+            router.push(`/PerfilArtista/${idArtista}`);
+        } else {
+            alert("Error al borrar la canción");
+        }
+    };
+
     return (
         <div className="flex justify-center mt-10 px-4">
             <div className="bg-fondoNavbar rounded shadow-md p-8 w-full max-w-5xl sm:w-180">
@@ -58,6 +76,12 @@ function FormularioModificarCancion() {
                     <button onClick={validarCampos} className="mt-4 bg-botones text-white py-2 rounded hover:bg-red-800 transition">
                         Guardar cambios
                     </button>
+                    
+                    {isAdmin && (
+                        <button onClick={borrarCancion} className="mt-2 bg-red-900 text-white py-2 rounded hover:bg-red-700 transition">
+                            Borrar canción
+                        </button>
+                    )}
                 </div>
             </div>
         </div>
@@ -69,7 +93,7 @@ export default function ModificarCancion() {
         <div>
             <NavBar />
             <Suspense fallback={<div className="text-center mt-10">Cargando...</div>}>
-                <FormularioModificarCancion />
+                <ModificarCancion />
             </Suspense>
         </div>
     );

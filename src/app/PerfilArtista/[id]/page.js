@@ -2,10 +2,14 @@
 import GridCanciones from "../GridCanciones";
 import NavBar from "../../navBar";
 import { useState, useEffect, use } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "../../context/AuthContext";
 
 export default function PerfilArtista({ params }) {
     const resolvedParams = use(params);
     const idArtista = resolvedParams.id;
+    const router = useRouter();
+    const { isAdmin } = useAuth();
 
     const [artista, setArtista] = useState(null);
     const [cargando, setCargando] = useState(true);
@@ -47,6 +51,22 @@ export default function PerfilArtista({ params }) {
         }
     };
 
+    const borrarArtista = async () => {
+        const confirmar = window.confirm("¿Estás seguro de que quieres borrar este artista?");
+        if (!confirmar) return;
+
+        const res = await fetch(`/api/artistas/${idArtista}`, {
+            method: 'DELETE'
+        });
+
+        if (res.ok) {
+            alert("Artista borrado correctamente");
+            router.push('/Inicio');
+        } else {
+            alert("Error al borrar el artista");
+        }
+    };
+
     if (cargando) return <div className="min-h-screen bg-black text-white flex justify-center items-center">Cargando perfil...</div>;
     if (!artista) return <div className="min-h-screen bg-black text-white flex justify-center items-center">Artista no encontrado</div>;
 
@@ -70,6 +90,15 @@ export default function PerfilArtista({ params }) {
                         >
                             {esFavorito ? 'Quitar de favoritos' : 'Añadir a favoritos'}
                         </button>
+                        
+                        {isAdmin && (
+                            <button
+                                onClick={borrarArtista}
+                                className="mt-2 w-full py-2 rounded-md transition font-bold bg-red-900 hover:bg-red-800 text-white"
+                            >
+                                Borrar artista
+                            </button>
+                        )}
                     </div>
                 </aside>
                 <main className="flex-1 px-4 sm:px-6 py-4">

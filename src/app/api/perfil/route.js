@@ -4,6 +4,11 @@ import { supabase } from '@/app/utils/supabase';
 export async function GET(request) {
     const { searchParams } = new URL(request.url);
     const idUsuario = searchParams.get('id');
+
+    if (!idUsuario) {
+        return NextResponse.json({ error: "ID de usuario no proporcionado" }, { status: 400 });
+    }
+
     try {
         const { data: usuario, error: errUser } = await supabase
             .from('Usuarios')
@@ -48,12 +53,16 @@ export async function GET(request) {
     } catch (error) {
         return NextResponse.json({ error: error.message }, { status: 500 });
     }
-
 }
+
 export async function PUT(request) {
     const { searchParams } = new URL(request.url);
     const idUsuario = searchParams.get('id');
     const body = await request.json();
+
+    if (!idUsuario || !body || Object.keys(body).length === 0) {
+        return NextResponse.json({ error: "Faltan datos o ID de usuario para actualizar" }, { status: 400 });
+    }
 
     try {
         const { data, error } = await supabase

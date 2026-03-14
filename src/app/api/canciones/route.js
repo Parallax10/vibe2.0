@@ -22,6 +22,10 @@ export async function GET(request) {
 export async function POST(request) {
   const body = await request.json();
 
+  if (!body || Object.keys(body).length === 0) {
+    return NextResponse.json({ error: "Faltan datos obligatorios para crear la canción" }, { status: 400 });
+  }
+
   const { data, error } = await supabase
     .from('Canciones')
     .insert([body])

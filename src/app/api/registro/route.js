@@ -5,6 +5,10 @@ export async function POST(request) {
     try {
         const { username, password, email } = await request.json();
 
+        if (!username || !password || !email) {
+            return NextResponse.json({ error: "Todos los campos son obligatorios" }, { status: 400 });
+        }
+
         const { data, error } = await supabase
             .from('Usuarios')
             .insert([
@@ -19,14 +23,12 @@ export async function POST(request) {
             ]);
 
         if (error) {
-            console.error("Error de Supabase:", error);
             return NextResponse.json({ error: error.message }, { status: 400 });
         }
 
         return NextResponse.json({ mensaje: "Usuario creado exitosamente" }, { status: 201 });
 
     } catch (error) {
-        console.error("Error en la API de registro:", error);
         return NextResponse.json({ error: "Error interno del servidor" }, { status: 500 });
     }
 }
