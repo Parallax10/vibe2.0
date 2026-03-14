@@ -44,7 +44,7 @@ export default function Login() {
 
     return (
         <div className="min-h-screen relative px-4">
-            <img src="/imagenes/Logo.png" width={80} alt="Logo Vibe" className="absolute top-4 left-4 sm:w-[100px]" />
+            <img src="/imagenes/Logo.png" width={80} alt="Logo Vibe" className="absolute top-4 left-4 sm:w-25" />
             <div className="min-h-screen flex flex-col items-center justify-center">
                 <h1 className="text-4xl sm:text-6xl font-bold mb-2">VIBE</h1>
                 <h2 className="text-2xl mb-8">Login</h2>
