@@ -13,6 +13,15 @@ export default function NavBar({ pageType, idArtista }) {
         router.push('/Login');
     };
 
+    const handleSearch = (e) => {
+        e.preventDefault();
+        if (busqueda.trim() !== "") {
+            router.push(`/Inicio?search=${encodeURIComponent(busqueda.trim())}`);
+        } else {
+            router.push('/Inicio');
+        }
+    };
+
     return (
         <div className="bg-fondoNavbar flex flex-col sm:flex-row items-center sm:justify-between px-4 sm:px-6">
             <div className="flex items-center w-full sm:w-auto mb-2 sm:mb-0">
@@ -39,7 +48,6 @@ export default function NavBar({ pageType, idArtista }) {
                             Modificar artista
                         </button>
 
-
                         <button
                             onClick={() => router.push(`/NuevaCancion?idArtista=${idArtista}`)}
                             className="px-3 sm:px-5 bg-green-600 text-white rounded-2xl hover:bg-green-800 transition"
@@ -59,12 +67,17 @@ export default function NavBar({ pageType, idArtista }) {
                 )}
             </div>
 
-            <div className="flex items-center w-full sm:w-auto my-2 sm:my-0">
-                <input className="bg-white rounded-2xl  px-2 py-1 w-full sm:w-auto text-black" type="text" value={busqueda} onChange={(e) => setBusqueda(e.target.value)} />
-                <button className="ml-2 sm:ml-5">
+            <form onSubmit={handleSearch} className="flex items-center w-full sm:w-auto my-2 sm:my-0">
+                <input 
+                    className="bg-white rounded-2xl px-2 py-1 w-full sm:w-auto text-black" 
+                    type="text" 
+                    value={busqueda} 
+                    onChange={(e) => setBusqueda(e.target.value)} 
+                />
+                <button type="submit" className="ml-2 sm:ml-5">
                     <img src="/imagenes/lupa.svg" width={25} alt="Buscar" />
                 </button>
-            </div>
+            </form>
 
             <div className="py-2 sm:py-5 flex gap-4 items-center">
                 <a href="/Perfil">

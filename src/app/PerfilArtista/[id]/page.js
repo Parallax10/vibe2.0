@@ -90,7 +90,7 @@ export default function PerfilArtista({ params }) {
                         >
                             {esFavorito ? 'Quitar de favoritos' : 'Añadir a favoritos'}
                         </button>
-                        
+
                         {isAdmin && (
                             <button
                                 onClick={borrarArtista}
@@ -103,7 +103,7 @@ export default function PerfilArtista({ params }) {
                 </aside>
                 <main className="flex-1 px-4 sm:px-6 py-4">
                     <div className="mb-6">
-                        <img src={artista.img_Banner || "/imagenes/adoBanner.png"} alt="Banner" className="w-full h-[200px] sm:h-[250px] object-cover rounded-lg" />
+                        <img src={artista.img_Banner || "/imagenes/adoBanner.png"} alt="Banner" className="w-full h-50 sm:h-62.5 object-cover rounded-lg" />
                     </div>
                     <div>
                         <h2 className="text-xl sm:text-2xl font-bold border-b border-gray-600 pb-2 mb-4">CANCIONES</h2>

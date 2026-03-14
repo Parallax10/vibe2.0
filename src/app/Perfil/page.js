@@ -57,12 +57,6 @@ export default function Perfil() {
                     <div className="space-y-3 text-sm">
                         <p className="font-bold">NOMBRE :</p>
                         <p className="text-gray-300 uppercase">{usuario.Nombre || "Usuario Vibe"}</p>
-                        
-                        <p className="font-bold">CORREO :</p>
-                        <p className="text-gray-300 break-words">{usuario.Correo}</p>
-                        
-                        <p className="font-bold">PRIVACIDAD :</p>
-                        <p className="text-gray-300 uppercase">{usuario.Privacidad || "Público"}</p>
 
                         <button 
                             onClick={() => router.push('/ConfiguracionPerfil')}
@@ -78,7 +72,7 @@ export default function Perfil() {
                         <img 
                             src={usuario.FtoBanner || "/imagenes/banner.jpg"} 
                             alt="Banner" 
-                            className="w-full h-[200px] sm:h-[250px] object-cover rounded-lg" 
+                            className="w-full h-50 sm:h-62.5 object-cover rounded-lg" 
                         />
                     </div>
                     
