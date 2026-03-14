@@ -1,49 +1,68 @@
 =================VIBE=================
+
 -¿Que es?
-    Es un prototipo de aplicacion donde se podran ver y descubrir artistas orientados a la musica, podras añadir tus favoritos a tu perfil y descubrir otros nuevos,esta orientado principalmente al formato Web para que este disponible tanto en ordenadores como en dispositivos moviles.
+Es una aplicacion web donde se pueden ver y descubrir artistas musicales. Los usuarios pueden registrarse, iniciar sesion, añadir artistas y canciones a sus favoritos y descubrir otros nuevos. Esta orientada al formato web y se adapta a dispositivos moviles. Tambien cuenta con funciones de administrador para gestionar todo el contenido.
 
 -¿Como desplegarlo?
-    Para desplegarlo tienes que tener descargado Node.js y npm, una vez instalados necesitas ejecutar un cmd, ya sea el integrado en windows o la terminal de visual studio code, en ambos el procedimiento es el mismo, debes de dirigirte hacia la ruta donde este descargado el proyecto en este caso te debes de ubicar dentro de la carpeta "projectodi" y ejecutar el comando "npm install" para instalar las dependencias de npm y luego ejecutar "npm run dev" para que se empieze a renderizar el projecto, en la terminal te aparecera para dirijirte hacia tu "localhost/3000" que es donde se empezara a renderizar la pagina.
+Para desplegarlo tienes que tener descargado Node.js. Una vez instalado, abre una terminal en la carpeta principal del proyecto y ejecuta el comando "npm install" para instalar las dependencias necesarias.
+
+
+IMPORTANTE: Antes de iniciar el proyecto, necesitas crear un archivo llamado ".env.local" en la misma carpeta donde esta el package.json. En ese archivo debes poner las variables para conectar la base de datos:
+NEXT_PUBLIC_SUPABASE_URL=tu_url_de_supabase
+NEXT_PUBLIC_SUPABASE_ANON_KEY=tu_clave_de_supabase
+
+Despues de guardar ese archivo, ejecuta "npm run dev" para arrancar el proyecto. Podras verlo abriendo tu navegador en "http://localhost:3000".
+
+
 
 -¿Como se usa?
-    Esta version no cuenta con apenas funcionalidades, es solo el esqueleto de los componentes de la aplicacion y las paginas que tendra,
-    La primera pagina que renderiza corresponderia a la Landing, para acceder a las diferentes paginas a continuacion proporciono lo que debes de poner en la parte superior de tu navegador donde aparecen las url de las paginas web, estas seran las que podran acceder los usuarios sin rango administrador:
+La aplicacion ya tiene todas sus paginas conectadas. Ya no hay un boton manual para cambiar la vista; la pagina detecta automaticamente si eres un usuario normal o un administrador al iniciar sesion, y te muestra las opciones correspondientes.
 
-       
-    -localhost:3000/Login
-    -localhost:3000/Registro
-    -localhost:3000/Inicio
-    -localhost:3000/FiltroGenero
-    -localhost:3000/FiltroPais
-    -localhost:3000/Perfil
-    -localhost:3000/ConfiguracionPerfil
-    -localhost:3000/PerfilArtista
 
-    --ACLARACION--
-    Las paginas de filtro no son funcionales, deberian de modificar el grid de los artistas para poder filtrar segun pais/genero, pero aun no soy capaz de hacerlo, sera implementado en el futuro.
+Las paginas a las que puedes acceder son:
+- localhost:3000/Login
+- localhost:3000/Registro
+- localhost:3000/Inicio
+- localhost:3000/FiltroGenero
+- localhost:3000/FiltroPais
+- localhost:3000/Perfil
+- localhost:3000/ConfiguracionPerfil
+- localhost:3000/PerfilArtista
 
-    Estos serian las paginas a las que unicamente tendran acceso los usuarios de rango administrador, aparte de estas en las paginas de usuarios hay un boton que sirve para alternar a como lo veria un administrador y como lo veria un usuario normal un ejemplo es en la pagina inicio al ser usuario apareceria un boton llamado "sugerir artista" pero siendo administrador seria "añadir artista":
-    
-    -localhost:3000/ModificarArtista
-    -localhost:3000/NuevoArtista
+Paginas exclusivas para administradores:
+- localhost:3000/NuevoArtista
+- localhost:3000/ModificarArtista
+- localhost:3000/NuevaCancion
+- localhost:3000/ModificarCancion
+
+
 
 -¿Que tecnologias usa?
-    Principalmente usa React y componentes HTML por el momento, en esta version aun no cuenta con diseños en CSS ni formato responsive para verse de forma comoda en dispositivos moviles, tambien para el control de versiones se usa GitHub en una rama develop.
+Principalmente usa Next.js con React para la parte visual. Para el diseño y que se vea bien en moviles se usa Tailwind CSS.
+Para la parte del servidor se usan las rutas de la API de Next.js, y para guardar toda la informacion de forma real se usa una base de datos en Supabase. El control de versiones sigue en GitHub en la rama develop.
 
--Funcionalidades previstas:
-    Sistema de filtros funcional por género musical.
-    Sistema de filtros funcional por país.
-    Sistema de favoritos.
-    Roles usuario y administrador.
-    Añadir y editar artistas.
-    Sugerencias de artistas por parte de los usuarios.
-    Diseño responsive para dispositivos móviles.
-    Estilos con CSS.
-    Inicio de sesion y registro de usuarios.
-    Persistencia de datos con base de datos.
+-Base de datos y Backend:
+La base de datos tiene tablas separadas para guardar a los Usuarios, los Artistas, las Canciones y las listas de Favoritos.
+El servidor tiene rutas preparadas para leer, crear, modificar y borrar informacion. Estas rutas estan en la carpeta "api" y son:
+- /api/login y /api/registro para controlar el acceso.
+- /api/artistas para añadir, ver, editar y borrar artistas.
+- /api/canciones para gestionar la musica.
+- /api/favoritos para que cada usuario gestione su lista de favoritos.
+- /api/perfil para ver y modificar los datos de la cuenta.
+
+-Funcionalidades implementadas:
+Sistema de filtros funcional por genero musical.
+Sistema de filtros funcional por pais.
+Sistema de favoritos para canciones y artistas.
+Roles automaticos de usuario y administrador.
+Añadir, editar y borrar artistas y canciones de la base de datos.
+Diseño adaptado para dispositivos moviles.
+Estilos aplicados con Tailwind.
+Inicio de sesion y registro de usuarios con control de errores.
+Guardado de datos reales con base de datos en Supabase.
 
 -Autor:
-    https://github.com/Parallax10
+[https://github.com/Parallax10](https://github.com/Parallax10)
 
 -Repositorio en GitHub:
-    https://github.com/Parallax10/Vibe
+[https://github.com/Parallax10/Vibe](https://github.com/Parallax10/Vibe)
