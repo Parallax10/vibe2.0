@@ -12,7 +12,7 @@ export default function GridArtistas({ modo, size = "small" }) {
     useEffect(() => {
         const cargarArtistas = async () => {
             try {
-                const respuesta = await fetch(`/api/artistas?t=${Date.now()}`, { cache: 'no-store' });
+                const respuesta = await fetch(`/api/artistas?t=${Date.now()}`);
                 if (respuesta.ok) {
                     const datos = await respuesta.json();
                     setArtistas(datos); 
