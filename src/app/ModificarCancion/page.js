@@ -4,7 +4,7 @@ import NavBar from "../navBar";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useAuth } from "../context/AuthContext";
 
-function ModificarCancion() {
+function ModificarCancionContenido() {
     const [portada, setPortada] = useState("");
     const [nombre, setNombre] = useState("");
     const [idArtista, setIdArtista] = useState(null);
@@ -93,7 +93,7 @@ export default function ModificarCancion() {
         <div>
             <NavBar />
             <Suspense fallback={<div className="text-center mt-10">Cargando...</div>}>
-                <ModificarCancion />
+                <ModificarCancionContenido />
             </Suspense>
         </div>
     );
