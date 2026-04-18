@@ -1,9 +1,11 @@
 =================VIBE=================
 
+URL DESPLIEGE: https://project-8lgk1-qjn3avl9y-serteme05-7602s-projects.vercel.app?_vercel_share=zvsdIIRx08O0moMc4qJSTeRoA3lW3mIT
+
 -¿Que es?
 Es una aplicacion web donde se pueden ver y descubrir artistas musicales. Los usuarios pueden registrarse, iniciar sesion, añadir artistas y canciones a sus favoritos y descubrir otros nuevos. Esta orientada al formato web y se adapta a dispositivos moviles. Tambien cuenta con funciones de administrador para gestionar todo el contenido.
 
--¿Como desplegarlo?
+-¿Como desplegarlo en local?
 Para desplegarlo tienes que tener descargado Node.js. Una vez instalado, abre una terminal en la carpeta principal del proyecto y ejecuta el comando "npm install" para instalar las dependencias necesarias.
 
 
@@ -65,4 +67,4 @@ Guardado de datos reales con base de datos en Supabase.
 [https://github.com/Parallax10](https://github.com/Parallax10)
 
 -Repositorio en GitHub:
-[https://github.com/Parallax10/Vibe](https://github.com/Parallax10/Vibe)
+[https://github.com/Parallax10/Vibe](https://github.com/Parallax10/vibe2.0)
