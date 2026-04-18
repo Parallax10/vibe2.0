@@ -13,12 +13,12 @@ export async function POST(request) {
         const columnaItem = tipo === 'artista' ? 'id_artista' : 'id_cancion';
 
         if (accion === 'check') {
-            const { data, error } = await supabase.from(tabla).select('*').eq('id_usuario', id_usuario).eq(columnaItem, id_item).single();
+            const { data, error } = await supabase.from(tabla).select('*').eq('id_usuario', id_usuario).eq(columnaItem, id_item).maybeSingle();
             return NextResponse.json({ isFavorito: !!data }, { status: 200 });
         }
 
         if (accion === 'toggle') {
-            const { data: existeData } = await supabase.from(tabla).select('*').eq('id_usuario', id_usuario).eq(columnaItem, id_item).single();
+            const { data: existeData, error: checkError } = await supabase.from(tabla).select('*').eq('id_usuario', id_usuario).eq(columnaItem, id_item).maybeSingle();
 
             if (existeData) {
                 const { error: deleteError } = await supabase.from(tabla).delete().eq('id', existeData.id);

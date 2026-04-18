@@ -5,9 +5,9 @@ import { useAuth } from "../context/AuthContext";
 
 export default function CardCanciones({ id, titulo, artistaNombre, portada, size = "small" }) {
   const [esFavorito, setEsFavorito] = useState(false);
+  const [idUsuarioActual, setIdUsuarioActual] = useState(null);
   const { isAdmin } = useAuth();
   const router = useRouter();
-  const idUsuarioActual = 1;
 
   const cardSize = size === "large"
     ? "w-64 h-80 p-6 text-base"
@@ -16,7 +16,15 @@ export default function CardCanciones({ id, titulo, artistaNombre, portada, size
   const imgSize = size === "large" ? 120 : 80;
 
   useEffect(() => {
-    if (id) {
+    const usuarioGuardado = localStorage.getItem('usuarioVibe');
+    if (usuarioGuardado) {
+      const usuarioObj = JSON.parse(usuarioGuardado);
+      setIdUsuarioActual(usuarioObj.id);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (id && idUsuarioActual) {
       fetch('/api/favoritos', {
         method: 'POST',
         body: JSON.stringify({ id_usuario: idUsuarioActual, id_item: id, tipo: 'cancion', accion: 'check' })
@@ -25,13 +33,21 @@ export default function CardCanciones({ id, titulo, artistaNombre, portada, size
         .then(data => setEsFavorito(data.isFavorito))
         .catch(err => console.error(err));
     }
-  }, [id]);
+  }, [id, idUsuarioActual]);
 
-  const toggleFavorito = async () => {
+  const toggleFavorito = async (e) => {
+    e.preventDefault();
+    
+    if (!idUsuarioActual) {
+      alert("Debes iniciar sesión para añadir a favoritos");
+      return;
+    }
+
     const res = await fetch('/api/favoritos', {
       method: 'POST',
       body: JSON.stringify({ id_usuario: idUsuarioActual, id_item: id, tipo: 'cancion', accion: 'toggle' })
     });
+    
     if (res.ok) {
       const data = await res.json();
       setEsFavorito(data.isFavorito);
