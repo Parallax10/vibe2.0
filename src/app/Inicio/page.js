@@ -1,9 +1,10 @@
 "use client"
+import { Suspense } from "react";
 import NavBar from "../navBar";
 import GridArtistas from "../GridArtistas";
 import { useSearchParams } from "next/navigation";
 
-export default function Home() {
+function InicioContenido() {
     const searchParams = useSearchParams();
     const searchQuery = searchParams.get("search");
 
@@ -33,5 +34,12 @@ export default function Home() {
                 </div>
             )}
         </div>
+    );
+}
+export default function Home() {
+    return (
+        <Suspense fallback={<div className="text-center mt-10">Cargando inicio...</div>}>
+            <InicioContenido />
+        </Suspense>
     );
 }
