@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Suspense } from "react";
 import GridArtistas from "./GridArtistas";
 
 export default function Home() {
@@ -38,7 +39,9 @@ ARTISTAS AGREGADOS RECIENTEMENTE</h2>
       <br />
 
       <div className="w-full">
-        <GridArtistas size="large" />
+        <Suspense fallback={<div className="text-center">Cargando artistas...</div>}>
+          <GridArtistas size="large" />
+        </Suspense>
       </div>
     </div>
   );
